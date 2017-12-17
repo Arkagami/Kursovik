@@ -974,24 +974,26 @@ namespace Курсач
         {
             int X0 = s.Location.X,
                 Y0 = s.Location.Y,
-                x, y;
+                x, y, x1, x2, y1, y2;
+                y2 = (Y0 - 31) / 58;
+                x2 = (X0 - 17) / 58;
 
             int fdamka;
-            int y_2 = (Y0 - 31) / 58, x_2 = (X0 - 17) / 58;
             for (int j = 0; j < 8; j++)
             {
                 setCoord();
-                fdamka = damkas[shahs[y_2, x_2] - 1];
+                fdamka = damkas[shahs[(Y0 - 31) / 58, (X0 - 17) / 58] - 1];
                 x = X0 + 58 * hodi[j, 0];
                 y = Y0 + 58 * hodi[j, 1];
-                int y_1 = (y - 31) / 58, x_1 = (x - 17) / 58;
+                y1 = (y - 31) / 58;
+                x1 = (x - 17) / 58;
                 shashki[index, j + 1] = 0;
                 int al = allows(X0, Y0, x, y);
                 if (al > 0)
                 {
-                    shahs[y_1, x_1] = shahs[y_1, x_1];
-                    shahs[y_2, x_2] = 0;
-                    checkDamkas(y_1, x_1);
+                    shahs[y1, x1] = shahs[y2, x2];
+                    shahs[y2, x2] = 0;
+                    checkDamkas(y1, x1);
                     turns = (turns + 1) % 2;
                     rublys = rubls();
 
@@ -1002,7 +1004,7 @@ namespace Курсач
                     {
                         shashki[index, j + 1] = 1;
                     }
-                    else if ((fdamka == 0) && (damkas[shahs[y_1, x_1] - 1] == 1))
+                    else if ((fdamka == 0) && (damkas[shahs[y1, x1] - 1] == 1))
                     {
                         shashki[index, j + 1] = 3;
                     }
